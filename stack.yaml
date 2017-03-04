@@ -1,0 +1,17 @@
+resolver: lts-8.3
+
+packages:
+- '.'
+- location:
+    git:    https://github.com/abakst/Brisk
+    commit: de2ec17bb33a5f20cd32eed8abbf7ed700e05bb0
+  extra-dep: true
+extra-deps:
+- distributed-process-async-0.2.3
+- distributed-process-extras-0.2.1.2
+- distributed-process-client-server-0.1.3.2
+
+flags: {}
+
+extra-package-dbs: []
+
