@@ -6,6 +6,10 @@ packages:
     git:    https://github.com/abakst/Brisk
     commit: de2ec17bb33a5f20cd32eed8abbf7ed700e05bb0
   extra-dep: true
+- location:
+    git:    https://github.com/abakst/brisk-prelude
+    commit: 0f6eecd56c6dc1a57cdc80cf86f56ee1e5b262af
+  extra-dep: true
 extra-deps:
 - distributed-process-async-0.2.3
 - distributed-process-extras-0.2.1.2

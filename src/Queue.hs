@@ -3,6 +3,7 @@
 
 module Queue (queue) where
 
+import GHC.Base.Brisk
 import Control.Distributed.Process
 import Control.Distributed.BriskStatic
 import Control.Distributed.Process.Closure
