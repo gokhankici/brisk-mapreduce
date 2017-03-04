@@ -1,3 +1,4 @@
+SHELL      = /bin/bash
 CC         = stack ghc
 CARGS      = --make -i./src
 BINDER     = master
