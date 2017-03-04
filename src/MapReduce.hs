@@ -13,7 +13,7 @@ import Master
 
 remotable [ 'master ]
 
-main :: Process ()
-main =  do let node = undefined
-           spawn node $ $(mkBriskClosure 'master) ()
-           return ()
+mapreduce :: Process ()
+mapreduce =  do let node = undefined
+                spawn node $ $(mkBriskClosure 'master) ()
+                return ()
