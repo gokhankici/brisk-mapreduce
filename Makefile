@@ -16,7 +16,7 @@ $(PROLOGS): %-pl: src/%.hs
 		$<
 
 $(MODULES): %: src/%.hs
-	stack exec -- brisk $< $@ $(shell tr '[:upper:]' '[:lower:]' <<< $@)
+	stack exec -- brisk $< $(shell tr '[:upper:]' '[:lower:]' <<< $@)
 
 clean:
 	rm -f src/*.{dyn_,}{hi,o}
