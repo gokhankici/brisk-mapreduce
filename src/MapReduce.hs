@@ -1,7 +1,7 @@
 {-# LANGUAGE TemplateHaskell #-}
 {-# LANGUAGE DeriveGeneric #-}
 
-module MapReduce where
+module MapReduce (main) where
 
 import GHC.Base.Brisk
 import Control.Distributed.Process
@@ -14,7 +14,6 @@ import Master
 
 remotable [ 'master ]
 
-mapreduce :: Process ()
-mapreduce =  do let node = undefined
-                spawn node $ $(mkBriskClosure 'master) ()
+main :: NodeId -> Process ()
+main node =  do spawn node $ $(mkBriskClosure 'master) ()
                 return ()
