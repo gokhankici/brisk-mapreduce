@@ -23,8 +23,9 @@ master (node, nodes) =
      -- send queuePid (WorkSet [1..workCount])
 
      -- for k times ...
-     forN workCount (\_ -> do -- wait for a work result
-                              (Result n) <- expect :: Process Result
-                              return ()
-                    )
+
+     myFoldM go () [1::Int .. workCount]
+  where
+    go _ i = do (Result n) <- expect :: Process Result
+                return ()
 

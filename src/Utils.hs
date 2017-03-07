@@ -27,11 +27,10 @@ workCount =  15
 mapperCount :: Int
 mapperCount =  10
 
-forN :: Int -> (Int -> Process a) -> Process ()
-forN n f = foldM (\ _  i -> f i >> return ()) () [1..n]
-
-forEach :: SymSet ProcessId -> (ProcessId -> Process a) -> Process ()
-forEach s f = forM s f >> return ()
+myFoldM :: (t1 -> t0 -> Process t1) -> t1 -> [t0] -> Process t1
+myFoldM f b []     = return b
+myFoldM f b (x:xs) = do b' <- f b x
+                        myFoldM f b' xs
 
 getNodes :: Int -> Process [NodeId]
 getNodes n = do node <- getSelfNode
