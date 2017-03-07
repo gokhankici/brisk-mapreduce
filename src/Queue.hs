@@ -28,12 +28,9 @@ queue (nodes, master) =
      -- for k times ...
      myFoldM go () [1::Int .. workCount]
   
-
      -- for each mapper ...
-     forM mapperPids (\x -> do -- wait for its next request
-                                  (Request pid) <- expectFrom x :: Process Request
-                                  -- send the termination message
-                                  send x Term)
+     forM mapperPids (\x -> do (Request pid) <- expectFrom x :: Process Request
+                               send x Term)
 
      return ()
   where
