@@ -6,7 +6,7 @@ module Utils where
 import Control.Distributed.Process
 import Control.Distributed.Process.SymmetricProcess
 
-import Control.Monad (foldM)
+import Control.Monad (foldM, forM)
 import Data.Binary
 import Data.Typeable
 import GHC.Generics (Generic)
@@ -24,11 +24,14 @@ instance Binary Result
 workCount :: Int
 workCount =  15
 
+mapperCount :: Int
+mapperCount =  10
+
 forN :: Int -> (Int -> Process a) -> Process ()
 forN n f = foldM (\ _  i -> f i >> return ()) () [1..n]
 
 forEach :: SymSet ProcessId -> (ProcessId -> Process a) -> Process ()
-forEach s f = foldM (\ _ pid -> f pid >> return ()) () s
+forEach s f = forM s f >> return ()
 
 getNodes :: Int -> Process [NodeId]
 getNodes n = do node <- getSelfNode

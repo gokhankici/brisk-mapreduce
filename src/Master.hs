@@ -14,15 +14,17 @@ import Queue
 
 remotable [ 'queue ]
 
-master :: () -> Process ()
-master _ =
+master :: (NodeId, [NodeId]) -> Process ()
+master (node, nodes) =
   do self <- getSelfPid
-     let node = undefined
-     queuePid <- spawn node $ $(mkBriskClosure 'queue) self
-     send queuePid (WorkSet [1..workCount])
+     queuePid <- spawn node $ $(mkBriskClosure 'queue) (nodes, self)
+
+     -- -- Send the work list
+     -- send queuePid (WorkSet [1..workCount])
+
      -- for k times ...
      forN workCount (\_ -> do -- wait for a work result
-                              (Result n) <- expect
+                              (Result n) <- expect :: Process Result
                               return ()
                     )
 

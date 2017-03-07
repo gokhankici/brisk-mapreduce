@@ -14,6 +14,8 @@ import Master
 
 remotable [ 'master ]
 
-main :: NodeId -> Process ()
-main node =  do spawn node $ $(mkBriskClosure 'master) ()
-                return ()
+main :: Process ()
+main =  do node  <- getSelfNode
+           nodes <- getNodes mapperCount
+           spawnLocal $ master (node, nodes)
+           return ()

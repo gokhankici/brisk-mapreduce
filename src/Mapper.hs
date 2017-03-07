@@ -18,7 +18,7 @@ mapper queue = loop
              -- request a work from the work queue
              send queue (Request self)
              -- block until receive the work
-             work <- expect
+             work <- expect :: Process Work
              case work of
                -- if got a work, send the processed
                -- result to the master process

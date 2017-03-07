@@ -12,6 +12,7 @@ cabal-version:       >=1.10
 
 library
   hs-source-dirs:      src
+  ghc-options:         -fplugin Brisk.Plugin -fforce-recomp
   exposed-modules:     MapReduce
                      , Master
                      , Queue
