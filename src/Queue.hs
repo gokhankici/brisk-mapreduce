@@ -8,7 +8,7 @@ import Control.Distributed.Process
 import Control.Distributed.BriskStatic
 import Control.Distributed.Process.Closure
 import Control.Distributed.Process.SymmetricProcess
-import Control.Monad (forM)
+import Control.Monad (foldM, forM)
 
 import Utils
 import Mapper  
@@ -26,7 +26,7 @@ queue (nodes, master) =
      mapperPids <- spawnSymmetric nodes $ $(mkBriskClosure 'mapper) self
 
      -- for k times ...
-     myFoldM go () [1::Int .. workCount]
+     foldM go () [1::Int .. workCount]
   
      -- for each mapper ...
      forM mapperPids (\x -> do (Request pid) <- expectFrom x :: Process Request

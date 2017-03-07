@@ -27,11 +27,6 @@ workCount =  15
 mapperCount :: Int
 mapperCount =  10
 
-myFoldM :: (t1 -> t0 -> Process t1) -> t1 -> [t0] -> Process t1
-myFoldM f b []     = return b
-myFoldM f b (x:xs) = do b' <- f b x
-                        myFoldM f b' xs
-
 getNodes :: Int -> Process [NodeId]
 getNodes n = do node <- getSelfNode
                 return $ replicate n node

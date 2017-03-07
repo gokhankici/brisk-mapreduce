@@ -8,6 +8,7 @@ import Control.Distributed.Process
 import Control.Distributed.BriskStatic
 import Control.Distributed.Process.Closure
 import Control.Distributed.Process.SymmetricProcess
+import Control.Monad (foldM)
 
 import Utils
 import Queue
@@ -24,7 +25,7 @@ master (node, nodes) =
 
      -- for k times ...
 
-     myFoldM go () [1::Int .. workCount]
+     foldM go () [1::Int .. workCount]
   where
     go _ i = do (Result n) <- expect :: Process Result
                 return ()
